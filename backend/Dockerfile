@@ -1,9 +1,11 @@
 FROM node:18
 
-# Install Python, ffmpeg, and yt-dlp
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip ffmpeg && \
-    pip3 install yt-dlp
+# Clean and update, then install Python, ffmpeg, and yt-dlp
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-pip ffmpeg && \
+    pip3 install --no-cache-dir yt-dlp
 
 WORKDIR /app
 COPY . .
