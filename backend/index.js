@@ -19,6 +19,7 @@ app.post('/api/analyze', async (req, res) => {
     const info = JSON.parse(stdout);
     res.json({ videoInfo: info });
   } catch (err) {
+    console.error("Analyze error:", err);
     res.status(500).json({ error: 'Failed to analyze video.' });
   }
 });
